@@ -1,0 +1,14 @@
+C4Container
+    title Diagram Kontenerów (Level 2) - Aplikacja 3-warstwowa
+
+    Person(user, "Użytkownik", "Osoba korzystająca z aplikacji w przeglądarce.")
+
+    System_Boundary(c1, "System Aplikacji") {
+        Container(web_app, "Frontend (Single Page App)", "React/Vue/Angular", "Interfejs użytkownika, serwowany do przeglądarki")
+        Container(api_app, "Backend API", "Node.js/Python/Java", "Obsługa logiki biznesowej i zapytań API")
+        ContainerDb(db, "Baza Danych", "PostgreSQL/MySQL", "Przechowuje dane użytkowników i aplikacji")
+    }
+
+    Rel(user, web_app, "Przegląda stronę", "HTTPS (Port 3000/443)")
+    Rel(web_app, api_app, "Wykonuje zapytania API", "JSON/HTTP (Port 5000/8080)")
+    Rel(api_app, db, "Czyta/Zapisuje dane", "SQL (Port 5432/3306)")
