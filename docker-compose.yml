@@ -1,0 +1,28 @@
+services:
+  # 1. BAZA DANYCH
+  postgres_db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+    volumes:
+      - ./database:/var/lib/postgresql/data
+
+  # 2. BACKEND
+  api_server:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres_db
+
+  # 3. FRONTEND
+  client_app:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api_server
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
