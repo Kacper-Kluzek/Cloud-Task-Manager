@@ -24,7 +24,7 @@ VITE_API_URL=http://localhost:8081/api
 
 Ten adres URL powinien wskazywać na Twój serwer API backendu.
 
-## Uruchamianie lokalnie (Dewelopersko)
+## Uruchamianie lokalnie (Development)
 
 1.  **Zainstaluj zależności:**
     ```bash
