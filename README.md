@@ -31,3 +31,5 @@ Poniższa tabela przedstawia, jak poszczególne kontenery lokalne zostaną zmapo
 ##  Status Projektu
 * [x] **Artefakt 1:** Zaplanowano strukture folderów i diagram C4 
 * [x] **Artefakt 2:** Środowisko wielokontenerowe uruchomione lokalnie (Docker Compose).
+* [x] **Artefakt 3:** Działająca warstwa prenzentacji
+* [x] **Artefakt 4:** Działająca warstwa logiki, bazy danych i Docker
