@@ -1,16 +1,47 @@
-# React + Vite
+# Cloud Task Manager - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+To jest komponent frontendowy aplikacji Cloud Task Manager, zbudowany przy użyciu React i Vite. Udostępnia tablicę w stylu kanban do zarządzania zadaniami, obsługującą przeciąganie i upuszczanie (drag-and-drop), tworzenie, edycję oraz usuwanie zadań.
 
-Currently, two official plugins are available:
+## Wykorzystane technologie
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **React** - Biblioteka interfejsu użytkownika
+*   **Vite** - Narzędzie do budowania i serwer deweloperski
+*   **Axios** - Klient HTTP
+*   **Vanilla CSS** - Niestandardowe style z wykorzystaniem zmiennych CSS i efektu glassmorphism.
 
-## React Compiler
+## Wymagania wstępne
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*   Node.js (wersja 19)
+*   npm (lub yarn/pnpm)
 
-## Expanding the ESLint configuration
+## Zmienne środowiskowe
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Przed uruchomieniem aplikacji należy skonfigurować niezbędne zmienne środowiskowe. Utwórz plik `.env` w głównym katalogu `frontend`:
+
+```env
+VITE_API_URL=http://localhost:8081/api
+```
+
+Ten adres URL powinien wskazywać na Twój serwer API backendu.
+
+## Uruchamianie lokalnie (Dewelopersko)
+
+1.  **Zainstaluj zależności:**
+    ```bash
+    npm install
+    ```
+
+2.  **Uruchom serwer deweloperski:**
+    ```bash
+    npm run dev
+    ```
+    Aplikacja będzie standardowo dostępna pod adresem `http://localhost:5173`.
+
+## Docker
+
+Ten projekt zawiera plik `Dockerfile` dla kompilacji produkcyjnych, wykorzystujący Nginx do serwowania statycznej paczki Vite. Cała aplikacja jest orkiestrowana przy użyciu `docker-compose.yml` w głównym katalogu.
+
+Aby zbudować i uruchomić:
+```bash
+docker-compose up -d --build
+```
