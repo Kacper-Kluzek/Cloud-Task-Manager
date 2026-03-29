@@ -21,10 +21,10 @@ Poniższa tabela przedstawia, jak poszczególne kontenery lokalne zostaną zmapo
 
 | Komponent Aplikacji | Usługa Lokalna (Docker) | Usługa Chmurowa (Azure) | Uzasadnienie |
 | :--- | :--- | :--- | :--- |
-| **Warstwa Prezentacji** | Kontener `frontend` | **Azure Static Web Apps** | Optymalizacja pod kątem wydajności (CDN) i automatyczne skalowanie frontendu. |
-| **Warstwa Logiki** | Kontener `backend` | **Azure App Service (for Containers)** | Łatwe zarządzanie kontenerami Dockerowymi z pełnym wsparciem dla HTTPS i skalowania. |
+| **Warstwa Prezentacji** | Kontener `frontend` | **Azure Container Apps** | Niezależnie skalowalne środowisko kontenerowe idealne dla mikroserwisów. |
+| **Warstwa Logiki** | Kontener `backend` | **Azure Container Apps** | Łatwe zarządzanie kontenerami Dockerowymi z pełnym wsparciem dla HTTPS i skalowania. |
 | **Warstwa Danych** | Kontener `database` | **Azure Database for PostgreSQL** | Zarządzalna usługa bazy danych (Managed DB) z automatycznymi backupami i wysoką dostępnością. |
-| **Przechowywanie Obrazów** | Docker Build | **Azure Container Registry (ACR)** | Prywatne repozytorium do bezpiecznego przechowywania obrazów Docker. |
+| **Przechowywanie Obrazów** | Docker Build | **Docker Hub** | Popularny scentralizowany rejestr obrazów zintegrowany z wdrożeniami na platformie Azure. |
 
 ---
 
@@ -33,3 +33,5 @@ Poniższa tabela przedstawia, jak poszczególne kontenery lokalne zostaną zmapo
 * [x] **Artefakt 2:** Środowisko wielokontenerowe uruchomione lokalnie (Docker Compose).
 * [x] **Artefakt 3:** Działająca warstwa prenzentacji
 * [x] **Artefakt 4:** Działająca warstwa logiki, bazy danych i Docker
+* [x] **Artefakt 5:** System gotowy na chmurę
+* [x] **Artefakt 6:** Aplikacja wdrożona w Azure

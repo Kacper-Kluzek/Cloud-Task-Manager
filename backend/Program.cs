@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using backend.Data;
 
+DotNetEnv.Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +10,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "http://localhost:8080")
+        policy.WithOrigins("http://localhost:5173", "http://localhost:8080", "https://frontend-ctm.wittywave-7b5f94c5.swedencentral.azurecontainerapps.io")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -40,7 +41,8 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.EnsureCreated(); // Or db.Database.Migrate() for migrations
+    // Make sure the database exists and apply migrations
+    db.Database.Migrate(); 
 }
 
 app.Run();

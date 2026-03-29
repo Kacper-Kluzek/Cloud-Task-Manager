@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Data;
 using backend.Models;
+using backend.DTOs;
 
 namespace backend.Controllers;
 
@@ -18,14 +19,21 @@ public class TasksController : ControllerBase
 
     // GET: api/tasks
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<TaskItem>>> GetTasks()
+    public async Task<ActionResult<IEnumerable<TaskItemDto>>> GetTasks()
     {
-        return await _context.Tasks.ToListAsync();
+        var tasks = await _context.Tasks.ToListAsync();
+        return Ok(tasks.Select(t => new TaskItemDto
+        {
+            Id = t.Id,
+            Title = t.Title,
+            Status = t.Status,
+            Priority = t.Priority
+        }));
     }
 
     // GET: api/tasks/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<TaskItem>> GetTask(string id)
+    public async Task<ActionResult<TaskItemDto>> GetTask(string id)
     {
         var taskItem = await _context.Tasks.FindAsync(id);
 
@@ -34,27 +42,53 @@ public class TasksController : ControllerBase
             return NotFound();
         }
 
-        return taskItem;
+        return new TaskItemDto
+        {
+            Id = taskItem.Id,
+            Title = taskItem.Title,
+            Status = taskItem.Status,
+            Priority = taskItem.Priority
+        };
     }
 
     // POST: api/tasks
     [HttpPost]
-    public async Task<ActionResult<TaskItem>> PostTask(TaskItem taskItem)
+    public async Task<ActionResult<TaskItemDto>> PostTask(CreateTaskDto createDto)
     {
+        var taskItem = new TaskItem
+        {
+            Title = createDto.Title,
+            Status = createDto.Status,
+            Priority = createDto.Priority
+        };
+
         _context.Tasks.Add(taskItem);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetTask), new { id = taskItem.Id }, taskItem);
+        var taskDto = new TaskItemDto
+        {
+            Id = taskItem.Id,
+            Title = taskItem.Title,
+            Status = taskItem.Status,
+            Priority = taskItem.Priority
+        };
+
+        return CreatedAtAction(nameof(GetTask), new { id = taskItem.Id }, taskDto);
     }
 
     // PUT: api/tasks/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutTask(string id, TaskItem taskItem)
+    public async Task<IActionResult> PutTask(string id, UpdateTaskDto updateDto)
     {
-        if (id != taskItem.Id)
+        var taskItem = await _context.Tasks.FindAsync(id);
+        if (taskItem == null)
         {
-            return BadRequest();
+            return NotFound();
         }
+
+        taskItem.Title = updateDto.Title;
+        taskItem.Status = updateDto.Status;
+        taskItem.Priority = updateDto.Priority;
 
         _context.Entry(taskItem).State = EntityState.Modified;
 

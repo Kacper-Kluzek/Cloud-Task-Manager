@@ -1,8 +1,21 @@
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-});
+const api = axios.create();
+
+export const initApi = async () => {
+  try {
+    const response = await fetch('/config.json');
+    if (response.ok) {
+      const config = await response.json();
+      api.defaults.baseURL = config.VITE_API_URL || import.meta.env.VITE_API_URL;
+    } else {
+      api.defaults.baseURL = import.meta.env.VITE_API_URL;
+    }
+  } catch (err) {
+    console.error('Failed to load config.json', err);
+    api.defaults.baseURL = import.meta.env.VITE_API_URL;
+  }
+};
 
 export const taskService = {
   getTasks: async () => {
