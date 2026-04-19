@@ -447,11 +447,21 @@ body {
 }
 
 @media (max-width: 768px) {
-  .board {
-    grid-template-columns: 1fr;
-  }
   .app-container {
     padding: 1rem;
+    height: auto;
+    min-height: 100vh;
+  }
+  .board {
+    grid-template-columns: 1fr;
+    overflow-y: visible;
+  }
+  .column {
+    height: auto;
+    min-height: 300px;
+  }
+  .task-list {
+    overflow-y: visible;
   }
   .header-content {
     flex-direction: column;
