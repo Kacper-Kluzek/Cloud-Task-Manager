@@ -151,7 +151,7 @@ function Board() {
             <h1>Cloud Task Manager</h1>
             <p>A simple, elegant way to manage your work.</p>
           </div>
-          <button className="btn-primary" onClick={openCreateModal}>
+          <button className="btn-success" onClick={openCreateModal}>
             + Add Task
           </button>
         </div>

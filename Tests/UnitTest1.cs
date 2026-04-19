@@ -8,13 +8,10 @@ public class UnitTest1
     [Fact]
     public void NewTask_ShouldNotBeCompleted()
     {
-        // 1. Tworzenie obiektu (Arrange)
-        var task = new CloudTask();
+        var task = new TaskItem();
 
-        // 2. Nadanie nazwy (Act)
-        task.Name = "Przetestować bezpiecznik";
+        task.Title = "Przetestować bezpiecznik";
 
-        // 3. Weryfikacja (Asercja) (Assert)
-        Assert.False(task.IsCompleted);
+        Assert.Equal("To Do", task.Status);
     }
 }
